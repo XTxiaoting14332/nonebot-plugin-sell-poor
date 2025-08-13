@@ -1,114 +1,85 @@
 <div align="center">
-    <a href="https://v2.nonebot.dev/store">
-    <img src="https://raw.githubusercontent.com/fllesser/nonebot-plugin-template/refs/heads/resource/.docs/NoneBotPlugin.svg" width="310" alt="logo"></a>
+  <a href="https://nonebot.dev/store/plugins/"><img src="https://raw.githubusercontent.com/fllesser/nonebot-plugin-template/refs/heads/resource/.docs/NoneBotPlugin.svg" width="310" alt="logo"></a>
+  <br>
+<div align="center">
 
-## ✨ nonebot-plugin-template ✨
+# nonebot-plugin-sell-poor
+</div>
+_✨ 基于 LLM 的卖若插件 ✨_<br>
 
-<img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
-<a href="https://github.com/astral-sh/ruff">
-    <img src="https://img.shields.io/badge/code%20style-ruff-black?style=flat-square&logo=ruff" alt="ruff">
+
+<a href="./LICENSE">
+    <img src="https://img.shields.io/github/license/XTxiaoting14332/nonebot-plugin-sell-poor.svg" alt="license">
 </a>
-<a href="https://github.com/astral-sh/uv">
-    <img src="https://img.shields.io/badge/package%20manager-uv-black?style=flat-square&logo=uv" alt="uv">
+<a href="https://pypi.python.org/pypi/nonebot-plugin-sell-poor">
+    <img src="https://img.shields.io/pypi/v/nonebot-plugin-sell-poor.svg" alt="pypi">
 </a>
+<img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
+
 </div>
 
-> [!IMPORTANT]
-> **收藏项目** 方便下次创建插件仓库～⭐️
 
-<img width="100%" src="https://starify.komoridevs.icu/api/starify?owner=fllesser&repo=nonebot-plugin-template" alt="starify" />
 
-### 🎉 快速开始
+## 📖 介绍
 
-1. 点击 [创建仓库](https://github.com/new?template_owner=fllesser&template_name=nonebot-plugin-template&owner=%40me&name=nonebot-plugin-&visibility=public)
-2. **⚠️ 重要:** 前往仓库 `Settings` -> `Actions` -> `General` -> 最下方 `Workflow permissions`, 勾选 `Read and write permissions`，然后点击 `Save` 按钮
-3. 在 `Add file` 菜单中选择 `Create new file`, 在新文件名处输入`LICENSE`, 此时在右侧会出现一个 `Choose a license template` 按钮, 点击此按钮选择开源协议模板, 然后在最下方提交新文件到主分支(这会触发一个工作流，生成新的 `README`，并修改 `pyproject.toml` 等文件中的插件名称)
+基于 LLM 的卖若插件，使用智谱API<br>
+使用智谱的 `GLM-4-Flash` 进行检测，不消耗api余额
 
-> [!NOTE]
-> 模板库中自带了一个发布工作流, 你可以使用此工作流自动发布你的插件到 pypi
 
-<details>
-<summary>配置发布工作流</summary>
+## 💿 安装
 
-1. 前往 https://pypi.org/manage/account/#api-tokens 并创建一个新的 API 令牌。创建成功后不要关闭页面，不然你将无法再次查看此令牌。
-2. 在单独的浏览器选项卡或窗口中，打开 [Actions secrets and variables](./settings/secrets/actions) 页面。你也可以在 Settings - Secrets and variables - Actions 中找到此页面。
-3. 点击 New repository secret 按钮，创建一个名为 `PYPI_API_TOKEN` 的新令牌，并从第一步复制粘贴令牌。
+<details open>
+<summary>使用 nb-cli 安装</summary>
+在 nonebot2 项目的根目录下打开命令行, 输入以下指令安装
+
+    nb plugin install nonebot-plugin-sell-poor
 
 </details>
 
 <details>
-<summary>触发发布工作流</summary>
+<summary>pip安装</summary>
 
-更新版本号 
+    pip install nonebot-plugin-sell-poor
 
-    uv version --bump patch
-    
-possible values: major, minor, patch, stable, alpha, beta, rc, post, dev
+打开 nonebot2 项目根目录下的 `pyproject.toml` 文件, 在 `[tool.nonebot]` 部分追加写入
 
-提交并推送...
-
-从本地推送任意 `tag` 即可触发。
-
-创建 `tag`:
-
-    git tag v*
-
-推送本地所有 `tag`:
-
-    git push origin --tags
-
+    plugins = ["nonebot_plugin_llm_jade"]
 </details>
-
-> [!IMPORTANT]
-> 不会使用 uv ？
-
 <details>
-<summary>不会看文档去</summary>
+<summary>Github下载</summary>
 
-<details>
-<summary>安装 uv </summary>
+手动克隆本仓库或直接下载压缩包，将里面的 `nonebot_plugin_sell_poor` 文件夹复制到 `src/plugins` 中,并安装以下依赖
 
-`windows`:
+    httpx  PyJWT
 
-    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-`curl`:
-
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-`pipx`:
-
-    pipx install uv
-    
 </details>
 
-安装所有依赖(自动创建 `venv` 虚拟环境, `-p` 指定 `python` 版本):
 
-    uv sync --all-groups -p 3.12
-添加其他依赖, 例如 `koishi`(bushi
+</details><br>
 
-    uv add koishi
-[uv 文档](https://astral.sh/blog/uv)
-</details>
 
-> [!NOTE]
-> pre-commit 使用方法
+## 🔧配置项
+### 必填项
 
-<details>
-<summary>使用 nonemoji 为 commit message 添加 emoji 前缀 </summary>
+```
+#智谱清言的API Key
+sell_poor_token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-安装 `nonemoji`
+启用的群聊
+sell_poor_group = ["123456789","987654321"]
+```
 
-    pipx install nonemoji
-安装 `pre-commit`
+### 非必填项
 
-    pipx install pre-commit
+```
+#触发的概率（默认为0.5）
+sell_poor_probability = 0.5
 
-    pre-commit install
-添加到暂存区
+# 卖若文案
+sell_poor_text = "诶，还是太菜了，学不来，我也想有本领😭"
 
-    git add <待提交文件>
-使用 `nonemoji` 编辑 `commit message` 并**提交**
+```
 
-    nonemoji
+## 🖼️ 使用效果图
 
-仓库地址: [nonemoji](https://github.com/nonebot/nonemoji)
-</details>
+![image](./img/img.webp)
